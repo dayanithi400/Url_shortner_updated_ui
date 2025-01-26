@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {%load static%}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL_SHORTNER</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-beige text-gray-900 font-sans">
+  <div class="min-h-screen flex flex-col items-center justify-center px-6 bg-gradient-to-r from-beige-light to-beige-dark">
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold text-brown mb-4">Url Shortner</h1>
+
+      <!-- Display Success/Error Messages -->
+      <div>
+        {% if success_message %}
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
+                {{ success_message }}
+            </div>
+        {% endif %}
+    
+        {% if error_message %}
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+                {{ error_message }}
+            </div>
+        {% endif %}
+      </div>
+    
+
+      <!-- URL Shortener Form -->
+      <form method="POST">
+        {% csrf_token %}
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex-grow">
+            <label for="long-url" class="block text-sm font-medium mb-1">Enter your long URL here</label>
+            <input type="text" name="long-url" id="long-url" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-brown-200" placeholder="Enter URL" required>
+          </div>
+          <div class="flex-grow">
+            <label for="customize-link" class="block text-sm font-medium mb-1">Customize your link</label>
+            <div class="flex items-center border rounded-md">
+              <span class="px-4 text-gray-600">{{domain}}</span>
+              <input type="text" name="customize-link" id="customize-link" class="flex-grow px-2 py-2 focus:outline-none" placeholder="alias">
+            </div>
+          </div>
+          <button type="submit" class="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Recent URLs Section 
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-md mt-6 p-6">
+      <h2 class="text-xl font-semibold text-brown mb-4">Your Recent Bub-URLs</h2>
+
+      {% for url in recent_urls %}
+        <div class="flex items-center justify-between border-b pb-4 mb-4">
+          <div class="flex flex-col">
+            <span class="text-gray-700 font-medium">{{ url.Original_Url }}</span>
+            <span class="text-sm text-blue-500">{{ success_message }}{{ url.Short_Url }}</span>
+          </div>
+          <div class="flex gap-2">
+            <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md text-sm hover:bg-gray-300 transition" onclick="navigator.clipboard.writeText('bub.junyong.me/{{ url.Short_Url }}')">Copy</button>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-gray-500">No URLs shortened yet.</p>
+      {% endfor %}
+    </div>-->
+  </div>
+</body>
