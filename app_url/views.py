@@ -11,10 +11,7 @@ def generate_short_url():
 def index(request):
     short_url = None  # Initialize short_url for the response
     error_message = None  # Initialize error message
-    domain=request.build_absolute_uri
-    # Retrieve recent URLs to display
-    recent_urls = URL.objects.order_by('-created_at')[:5]
-    return render(request, 'index.html', {'domain': domain,})
+    
     if request.method == "POST":
         original_url = request.POST.get('long-url')  # Get the long URL from the form
         custom_alias = request.POST.get('customize-link')  # Get the custom alias, if provided
